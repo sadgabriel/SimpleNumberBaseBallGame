@@ -37,14 +37,32 @@ int main(void){
 
 
 			int player_num = 0;
-			scanf("%d",&player_num);
-
 			int num[4];
-			
-			for (int i = 3; i >= 0; i--){
-				num[i] = player_num % 10;
-				player_num /= 10;
+
+			while (1){
+				scanf("%d",&player_num);
+				int c;
+				while ((c = getchar()) != '\n');
+
+				if (player_num > 0 && player_num < 10000){
+					for (int i = 3; i >= 0; i--){
+					num[i] = player_num % 10;
+					player_num /= 10;
+					}
+
+					int ok = 0;
+					for (int i = 0; i < 4; ++i){
+						for (int j = 0; j < 4; ++j){
+							if (num[i] == num[j]) ++ok;
+						}
+					}
+					if (ok == 4) break;
+				}
+
+				printf("Invalid Number. Please Enter Again.\n");
+				player_num = 0;
 			}
+			
 
 			int s, b;
 			match(mygame, num, &s, &b);
